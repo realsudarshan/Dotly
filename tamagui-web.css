@@ -1,0 +1,14 @@
+/* Tamagui web CSS reset and utilities */
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  overflow: hidden;
+}
+
+#root {
+  display: flex;
+  flex: 1;
+}
