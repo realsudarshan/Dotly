@@ -1,27 +1,25 @@
-import { Feather } from "@tamagui/lucide-icons";
 import React from "react";
+import { Image, XStack, YStack } from "tamagui";
 
-import { Text, XStack, YStack } from "tamagui";
-
-export default function Logo({ hasText = false }: { hasText?: boolean }) {
+export default function Logo() {
   return (
-    <YStack gap="$3" style={{ alignItems: "center" }} mb="$4">
+    <YStack style={{ alignItems: "center" }}>
       <XStack
-        bg="$blue10"
-        p="$3"
         style={{
           alignItems: "center",
           justifyContent: "center",
-          borderRadius: 16,
+          width: 120,
+          height: 120,
+          borderRadius: 35,
+          overflow: "hidden",
         }}
       >
-        <Feather size={32} color="white" />
+        <Image
+          source={require("@/assets/images/logo.png")}
+          style={{ width: 180, height: 180 }}
+          resizeMode="contain"
+        />
       </XStack>
-      {hasText && (
-        <Text fontSize="$7" fontWeight="700" color="$color">
-          Journal.ai
-        </Text>
-      )}
     </YStack>
   );
 }

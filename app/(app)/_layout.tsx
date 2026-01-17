@@ -1,26 +1,37 @@
-import '../tamagui-web.css'
+import { useAuth } from "@clerk/clerk-expo";
+import { Stack } from "expo-router";
+import { Spinner } from "tamagui";
 
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native'
-import { Stack } from 'expo-router'
-import { useColorScheme } from 'react-native'
-import { TamaguiProvider } from 'tamagui'
+export default function Layout() {
+  const { isLoaded, isSignedIn } = useAuth();
 
-import { tamaguiConfig } from '@/tamagui.config'
-import { ClerkProvider } from '@clerk/clerk-expo'
-export default function RootLayout() {
-  const colorScheme = useColorScheme()
+  if (!isLoaded) {
+    return <Spinner/>;
+  }
 
   return (
-    // add this
-     <ClerkProvider>
-    <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme!}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-        </Stack>
-      </ThemeProvider>
-    </TamaguiProvider>
-    </ClerkProvider>
-  )
+    <Stack>
+    <Stack.Protected guard={isSignedIn}>
+     
+
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        </Stack.Protected>
+
+         <Stack.Protected guard={!isSignedIn}>
+        <Stack.Screen
+          name="sign-in"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="sign-up"
+          options={{
+            headerShown: false,
+          }}
+        />
+  
+      </Stack.Protected>
+    </Stack>    
+)
 }
