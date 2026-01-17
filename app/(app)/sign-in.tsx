@@ -3,6 +3,7 @@ import SignInWithGoogle from "@/components/SignInWithGoogle";
 import { useModal } from "@/contexts/ModalContext";
 import { isClerkAPIResponseError, useSignIn } from "@clerk/clerk-expo";
 import { ClerkAPIResponseError } from "@clerk/types";
+import { Eye, EyeOff } from "@tamagui/lucide-icons";
 import { Link, useRouter } from "expo-router";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -25,9 +26,34 @@ export default function Page() {
 
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const { showModal } = useModal();
+  // ... (rest of imports/code until Password Input)
+  <YStack gap="$2">
+    <Label color="$color">Password</Label>
+    <XStack alignItems="center">
+      <Input
+        flex={1}
+        secureTextEntry={!showPassword}
+        value={password}
+        placeholder="Enter your password"
+        onChangeText={setPassword}
+        borderColor="$borderColor"
+        focusStyle={{
+          borderColor: "$blue10",
+        }}
+      />
+      <Button
+        chromeless
+        position="absolute"
+        right={0}
+        icon={showPassword ? Eye : EyeOff}
+        onPress={() => setShowPassword(!showPassword)}
+      />
+    </XStack>
+  </YStack>
 
   // Handle the submission of the sign-in form
   const onSignInPress = async () => {
@@ -118,16 +144,25 @@ export default function Page() {
 
               <YStack gap="$2">
                 <Label color="$color">Password</Label>
-                <Input
-                  secureTextEntry
-                  value={password}
-                  placeholder="Enter your password"
-                  onChangeText={setPassword}
-                  borderColor="$borderColor"
-                  focusStyle={{
-                    borderColor: "$blue10",
-                  }}
-                />
+                <XStack style={{ alignItems: "center", justifyContent: "center" }}>
+                  <Input
+                    flex={1}
+                    secureTextEntry={!showPassword}
+                    value={password}
+                    placeholder="Enter your password"
+                    onChangeText={setPassword}
+                    borderColor="$borderColor"
+                    focusStyle={{
+                      borderColor: "$blue10",
+                    }}
+                  />
+                  <Button
+                    chromeless
+                    style={{ position: "absolute", right: 8 }}
+                    icon={showPassword ? Eye : EyeOff}
+                    onPress={() => setShowPassword(!showPassword)}
+                  />
+                </XStack>
               </YStack>
 
               <Spacer size="$2" />

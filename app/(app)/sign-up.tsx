@@ -1,6 +1,7 @@
 import Logo from "@/components/Logo";
 import { useModal } from "@/contexts/ModalContext";
 import { useSignUp } from "@clerk/clerk-expo";
+import { Eye, EyeOff } from "@tamagui/lucide-icons";
 import { useRouter } from "expo-router";
 import * as React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -23,10 +24,34 @@ export default function SignUpScreen() {
 
   const [emailAddress, setEmailAddress] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [showPassword, setShowPassword] = React.useState(false);
   const [pendingVerification, setPendingVerification] = React.useState(false);
   const [code, setCode] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const { showModal } = useModal();
+  // ... (imports and top of component)
+  <YStack gap="$2">
+    <Label color="$color">Password</Label>
+    <XStack style={{ alignItems: "center", justifyContent: "center" }}>
+      <Input
+        flex={1}
+        secureTextEntry={!showPassword}
+        value={password}
+        placeholder="Create a password"
+        onChangeText={setPassword}
+        borderColor="$borderColor"
+        focusStyle={{
+          borderColor: "$blue10",
+        }}
+      />
+      <Button
+        chromeless
+        style={{ position: "absolute", right: 8 }}
+        icon={showPassword ? Eye : EyeOff}
+        onPress={() => setShowPassword(!showPassword)}
+      />
+    </XStack>
+  </YStack>
 
   // Handle submission of sign-up form
   const onSignUpPress = async () => {
@@ -225,16 +250,25 @@ export default function SignUpScreen() {
 
               <YStack gap="$2">
                 <Label color="$color">Password</Label>
-                <Input
-                  secureTextEntry
-                  value={password}
-                  placeholder="Create a password"
-                  onChangeText={setPassword}
-                  borderColor="$borderColor"
-                  focusStyle={{
-                    borderColor: "$blue10",
-                  }}
-                />
+                <XStack style={{ alignItems: "center", justifyContent: "center" }}>
+                  <Input
+                    flex={1}
+                    secureTextEntry={!showPassword}
+                    value={password}
+                    placeholder="Create a password"
+                    onChangeText={setPassword}
+                    borderColor="$borderColor"
+                    focusStyle={{
+                      borderColor: "$blue10",
+                    }}
+                  />
+                  <Button
+                    chromeless
+                    style={{ position: "absolute", right: 8 }}
+                    icon={showPassword ? Eye : EyeOff}
+                    onPress={() => setShowPassword(!showPassword)}
+                  />
+                </XStack>
               </YStack>
 
               <Spacer />
