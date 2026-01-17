@@ -5,11 +5,35 @@ import { HelloWave } from '@/components/hello-wave';
 import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import { Button } from 'tamagui';
 import { SignOutButton } from '@/components/SignOutButton';
+import { useUser } from '@clerk/clerk-expo';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useStreaks } from '@/hooks/use-streaks';
+import { formatUppercaseDate, getTimeOfDayGreeting } from '@/lib/utils/date';
+import { getUserFirstName } from '@/lib/utils/user';
 
 export default function HomeScreen() {
+    const { user, isLoaded } = useUser();
+  const router = useRouter();
+  const insets = useSafeAreaInsets();
+  const {
+    currentStreak,
+    longestStreak,
+    isActive,
+    statusMessage,
+    daysUntilNextMilestone,
+    nextMilestone,
+    isLoading: streaksLoading,
+  } = useStreaks();
+
+  // Format current date and get greeting using utilities
+  const now = new Date();
+  const formattedDate = formatUppercaseDate(now);
+  const greeting = getTimeOfDayGreeting();
+  const userName = getUserFirstName(user);
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
