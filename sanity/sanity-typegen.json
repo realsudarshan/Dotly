@@ -1,0 +1,4 @@
+{
+  "path": "../lib/**/*.{ts,tsx}",
+  "generates": "./sanity.types.ts"
+}
