@@ -1,9 +1,9 @@
 import { defineQuery } from "groq";
-import type { ALL_CATEGORIES_QUERYResult } from "../../sanity/sanity.types";
+import type { ALL_CATEGORIES_QUERY_RESULT } from "../../sanity/sanity.types";
 import { sanityClient } from "./client";
 
 // Use generated types from TypeGen
-type Category = ALL_CATEGORIES_QUERYResult[0];
+type Category = ALL_CATEGORIES_QUERY_RESULT[0];
 
 // GROQ Queries - defined as module-level constants for Sanity typegen
 export const ALL_CATEGORIES_QUERY = defineQuery(`*[
@@ -16,7 +16,7 @@ export const ALL_CATEGORIES_QUERY = defineQuery(`*[
 
 // Helper function to fetch all categories
 export const fetchCategories =
-  async (): Promise<ALL_CATEGORIES_QUERYResult> => {
+  async (): Promise<ALL_CATEGORIES_QUERY_RESULT> => {
     try {
       const categories = await sanityClient.fetch(ALL_CATEGORIES_QUERY);
       return categories;

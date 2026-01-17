@@ -1,8 +1,8 @@
 import { defineQuery } from "groq";
 import type {
-  JOURNAL_ENTRY_BY_ID_QUERYResult,
-  USER_JOURNAL_ENTRIES_QUERYResult,
-  USER_JOURNAL_ENTRIES_WITH_DATE_RANGE_QUERYResult,
+  JOURNAL_ENTRY_BY_ID_QUERY_RESULT,
+  USER_JOURNAL_ENTRIES_QUERY_RESULT,
+  USER_JOURNAL_ENTRIES_WITH_DATE_RANGE_QUERY_RESULT,
 } from "../../sanity/sanity.types";
 import { categorizeJournalEntry } from "../utils/categorize";
 import { sanityClient } from "./client";
@@ -158,7 +158,7 @@ export const createJournalEntry = async (entry: JournalEntryInput) => {
 // Helper function to fetch user's journal entries
 export const fetchJournalEntries = async (
   userId: string
-): Promise<USER_JOURNAL_ENTRIES_QUERYResult> => {
+): Promise<USER_JOURNAL_ENTRIES_QUERY_RESULT> => {
   try {
     const entries = await sanityClient.fetch(USER_JOURNAL_ENTRIES_QUERY, {
       userId,
@@ -264,7 +264,7 @@ export const deleteJournalEntry = async (entryId: string) => {
 // Helper function to get journal entry by ID
 export const getJournalEntryById = async (
   entryId: string
-): Promise<JOURNAL_ENTRY_BY_ID_QUERYResult> => {
+): Promise<JOURNAL_ENTRY_BY_ID_QUERY_RESULT> => {
   try {
     const entry = await sanityClient.fetch(JOURNAL_ENTRY_BY_ID_QUERY, {
       entryId,
@@ -281,7 +281,7 @@ export const fetchJournalEntriesWithDateRange = async (
   userId: string,
   startDate: string,
   endDate: string
-): Promise<USER_JOURNAL_ENTRIES_WITH_DATE_RANGE_QUERYResult> => {
+): Promise<USER_JOURNAL_ENTRIES_WITH_DATE_RANGE_QUERY_RESULT> => {
   try {
     const entries = await sanityClient.fetch(
       USER_JOURNAL_ENTRIES_WITH_DATE_RANGE_QUERY,

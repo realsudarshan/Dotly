@@ -242,6 +242,15 @@ type ArrayOf<T> = Array<
   }
 >
 
+// Source: ..\lib\sanity\catagories.ts
+// Variable: ALL_CATEGORIES_QUERY
+// Query: *[  _type == "category"] | order(title asc) {  _id,  title,  color}
+export type ALL_CATEGORIES_QUERY_RESULT = Array<{
+  _id: string
+  title: string | null
+  color: string | null
+}>
+
 // Source: ..\lib\sanity\journal.ts
 // Variable: USER_JOURNAL_ENTRIES_QUERY
 // Query: *[  _type == "journalEntry"   && userId == $userId] | order(createdAt desc) {  _id,  title,  content,  mood,  createdAt,  aiGeneratedCategory->{    title,    color  }}
@@ -379,6 +388,7 @@ export type USER_JOURNAL_ENTRIES_WITH_DATE_RANGE_QUERY_RESULT = Array<{
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
+    '*[\n  _type == "category"\n] | order(title asc) {\n  _id,\n  title,\n  color\n}': ALL_CATEGORIES_QUERY_RESULT
     '*[\n  _type == "journalEntry" \n  && userId == $userId\n] | order(createdAt desc) {\n  _id,\n  title,\n  content,\n  mood,\n  createdAt,\n  aiGeneratedCategory->{\n    title,\n    color\n  }\n}': USER_JOURNAL_ENTRIES_QUERY_RESULT
     '*[\n  _type == "journalEntry" \n  && _id == $entryId\n][0]{\n  _id,\n  title,\n  content,\n  mood,\n  createdAt,\n  userId,\n  aiGeneratedCategory->{\n    title,\n    color\n  }\n}': JOURNAL_ENTRY_BY_ID_QUERY_RESULT
     '*[\n  _type == "journalEntry" \n  && userId == $userId\n  && createdAt >= $startDate\n  && createdAt <= $endDate\n] | order(createdAt desc) {\n  _id,\n  title,\n  content,\n  mood,\n  createdAt,\n  aiGeneratedCategory->{\n    title,\n    color\n  }\n}': USER_JOURNAL_ENTRIES_WITH_DATE_RANGE_QUERY_RESULT
