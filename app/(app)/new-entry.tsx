@@ -1,4 +1,4 @@
-// import JournalEntryForm from "@/components/JournalEntryForm";
+import JournalEntryForm from "@/components/JournalEntryForm";
 import { createJournalEntry } from "@/lib/sanity/journal";
 import { router, useLocalSearchParams } from "expo-router";
 import React from "react";
@@ -60,11 +60,11 @@ export default function NewEntryScreen() {
         keyboardVerticalOffset={0}
       >
         
-        {/* <JournalEntryForm
+        <JournalEntryForm
           onSave={handleSave}
           onCancel={handleCancel}
           initialData={initialData}
-        /> */}
+        />
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
