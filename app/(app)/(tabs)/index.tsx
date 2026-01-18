@@ -1,4 +1,5 @@
 
+import DailyPromptCards from "@/components/DailyPromptCards";
 import Logo from "@/components/Logo";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { AppColors } from "@/constants/theme";
@@ -227,7 +228,7 @@ export default function HomeScreen() {
         )}
 
         {/* Daily Prompts Section */}
-        
+        <DailyPromptCards/>
 
         {/* Action Buttons */}
         <YStack gap="$3" mb="$6">

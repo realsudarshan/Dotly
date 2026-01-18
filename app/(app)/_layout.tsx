@@ -15,6 +15,9 @@ export default function Layout() {
      
 
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+         <Stack.Screen name="new-entry" options={{ headerShown: false }} />
+        <Stack.Screen name="edit-entry/[id]" options={{ headerShown: false }} />
+        <Stack.Screen name="entry/[id]" options={{ headerShown: false }} />
         </Stack.Protected>
 
          <Stack.Protected guard={!isSignedIn}>

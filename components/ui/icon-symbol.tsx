@@ -24,6 +24,9 @@ const MAPPING = {
   'target': 'track-changes',
   'plus.circle.fill': 'add-circle',
   'book.fill': 'book',
+  'plus': 'add',
+  'heart.fill': 'favorite',
+  'person.fill': 'person',
 } as IconMapping;
 
 /**
